@@ -1,9 +1,15 @@
+import Header from './components/Header';
+import Tasks from './components/Tasks';
+
 function App() {
+	// const name = 'Somayeh';
 	return (
-		<>
-			<h1>Hello from react</h1>
-			<h2>Hello</h2>
-		</>
+		<div className="container">
+			{/*<h1>Hello from react</h1>*/}
+			{/*<h2>Hello {name}</h2>*/}
+			<Header />
+			<Tasks />
+		</div>
 	);
 }
 

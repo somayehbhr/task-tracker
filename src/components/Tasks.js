@@ -1,12 +1,9 @@
 import Task from "./Task";
+import { useTasks } from "../contexts/task.context";
 
 const Tasks = ({ tasks, onDelete, onToggle }) => {
-	return (
-		<>
-			{tasks.map((task) => (
-				<Task key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
-			))}
-		</>
-	);
+	const state = useTasks();
+
+	return <>{state.list.length ? state.list.map((task) => <Task key={task.id} task={task} />) : "There is no task"}</>;
 };
 export default Tasks;

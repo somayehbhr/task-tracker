@@ -34,12 +34,17 @@ function App() {
 	const toggleReminder = (id) => {
 		setTasks(tasks.map((task) => (task.id === id ? { ...task, reminder: !task.reminder } : task)));
 	};
+	/**
+	 * Add task
+	 */
+	const addTask = (task) => {console.log(task);
 	return (
 		<div className="container">
 			{/*<h1>Hello from react</h1>*/}
 			{/*<h2>Hello {name}</h2>*/}
 			<Header />
-			<AddTask />
+			<AddTask onAdd
+			/>
 			{tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} /> : "No tasks to show!"}
 		</div>
 	);

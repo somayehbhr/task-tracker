@@ -29,9 +29,10 @@ function reducer(state, action) {
 				list: state.list.concat(action.payload),
 			};
 		case "REMOVE_TASK":
+			console.log(action);
 			return {
 				...state,
-				list: state.list.filter((task) => task.id !== action.payload.id),
+				list: state.list.filter((task) => task.id !== action.payload),
 			};
 		case "TOGGLE_TASK_REMINDER":
 			return {
@@ -42,32 +43,33 @@ function reducer(state, action) {
 			return state;
 	}
 }
+const initialState2 = {
+	name: "Ali",
+	age: 25,
+	mikh: "Somayeh",
+	goldon: "Somayeh",
+};
+function reducer2(state = initialState2, action) {
+	return { ...state, ...action };
+}
 
 function App() {
+	const [state2, dispatch2] = useReducer(reducer2, initialState2);
 	const [state, dispatch] = useReducer(reducer, initialState);
-	// const name = 'Somayeh';
-	// const [tasks, setTasks] = useState(initialState.list);
+	console.log("dispatch2", dispatch2);
 
-	// /**
-	//  * deleting task
-	//  * @param id
-	//  */
-	// const deleteTask = (id) => {
-	// 	setTasks(tasks.filter((task) => task.id !== id));
-	// };
-	// /**
-	//  * show reminder when click on task
-	//  * @param id
-	//  */
-	// const toggleReminder = (id) => {
-	// 	setTasks(tasks.map((task) => (task.id === id ? { ...task, reminder: !task.reminder } : task)));
-	// };
-	// /**
-	//  * Add task
-	//  */
-	// const addTask = (task) => {
-	// 	setTasks(tasks.concat(task));
-	// };
+	React.useEffect(() => {
+		console.log("state2", state2);
+	}, [state2.name, state2.age]); // if deps was empty, componentDidMount
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			dispatch2({
+				name: "Optimize Prime",
+			});
+		}, 3000);
+	}, []);
+
 	return (
 		<TaskContext.Provider value={state}>
 			<TaskContextDispatch.Provider value={dispatch}>
@@ -75,7 +77,7 @@ function App() {
 					{/*<h1>Hello from react</h1>*/}
 					{/*<h2>Hello {name}</h2>*/}
 					<Header />
-					<AddTask onAdd />
+					<AddTask />
 					<Tasks />
 				</div>
 			</TaskContextDispatch.Provider>
